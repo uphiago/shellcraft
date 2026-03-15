@@ -88,14 +88,22 @@ export default function LayerDiagram() {
     return () => ro.disconnect()
   }, [])
 
-  function handleClick(i, el) {
-    setActiveIdx(i)
+  function handleClick(i, rowEl) {
     if (!clicked) setClicked(true)
-    // On mobile: reanchor the clicked row after layout shift
-    if (el && window.innerWidth <= 900) {
-      setTimeout(() => {
-        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-      }, 20)
+
+    // On mobile: lock the clicked row in place during layout shift
+    if (rowEl && window.innerWidth <= 900) {
+      const before = rowEl.getBoundingClientRect().top
+      setActiveIdx(i)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const after = rowEl.getBoundingClientRect().top
+          const diff = after - before
+          if (diff !== 0) window.scrollBy({ top: diff, behavior: 'instant' })
+        })
+      })
+    } else {
+      setActiveIdx(i)
     }
   }
 
