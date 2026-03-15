@@ -12,29 +12,45 @@ section {
   width: 100%;
 }
 
+@media (max-width: 600px) {
+  section {
+    padding: 56px 20px;
+  }
+  .section-title {
+    font-size: 28px;
+  }
+  .section-desc {
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+}
+
 .section-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: var(--text-muted);
+  font-family: 'GeistMono', monospace;
+  font-size: 11px;
+  color: var(--text-faint);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 12px;
+  letter-spacing: 0.18em;
+  margin-bottom: 14px;
 }
 
 .section-title {
-  font-size: 36px;
+  font-family: 'GeistPixel', monospace;
+  font-size: 38px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 8px;
-  line-height: 1.2;
+  margin-bottom: 10px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 .section-title span {
-  background: linear-gradient(135deg,
-    oklch(72% 0.18 250) 0%,
-    oklch(68% 0.22 270) 35%,
-    oklch(65% 0.2 300) 65%,
-    oklch(72% 0.15 310) 100%
+  /* B&W gradient — white to light gray, subtle */
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    rgba(255,255,255,0.75) 50%,
+    rgba(255,255,255,0.55) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

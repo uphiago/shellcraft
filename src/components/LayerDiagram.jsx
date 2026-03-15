@@ -124,25 +124,73 @@ export default function LayerDiagram() {
           ))}
         </div>
 
-        <div className={`layer-detail glass-card ${activeLayer ? 'visible' : ''}`}>
+        <div className={`layer-detail ${activeLayer ? 'visible' : ''}`}>
           {activeLayer ? (
-            <>
+            <div className="detail-inner glass-card">
+              {/* header */}
               <div className="detail-header" style={{ '--color': activeLayer.color }}>
-                <span className="detail-icon mono">{activeLayer.icon}</span>
-                <span className="detail-label">{activeLayer.label}</span>
-              </div>
-              <p className="detail-text">{activeLayer.details}</p>
-              <div className="detail-tools">
-                <div className="detail-tools-label mono">{lt.toolsLabel}</div>
-                <div className="detail-tools-list">
-                  {activeLayer.tools.map(tool => (
-                    <ToolChip key={tool} name={tool} large />
-                  ))}
+                <div className="detail-header-left">
+                  <span className="detail-icon">{activeLayer.icon}</span>
+                  <div>
+                    <div className="detail-label">{activeLayer.label}</div>
+                    {activeLayer.responsibility && (
+                      <div className="detail-responsibility mono">{activeLayer.responsibility}</div>
+                    )}
+                  </div>
                 </div>
+                {activeLayer.optional && (
+                  <span className="detail-optional-badge mono">{lt.optional}</span>
+                )}
               </div>
-            </>
+
+              {/* description */}
+              <p className="detail-text">{activeLayer.details}</p>
+
+              {/* misconception */}
+              {activeLayer.misconception && (
+                <div className="detail-misconception">
+                  <span className="detail-misconception-icon">⚠</span>
+                  <p>{activeLayer.misconception}</p>
+                </div>
+              )}
+
+              {/* facts */}
+              {activeLayer.facts?.length > 0 && (
+                <div className="detail-facts">
+                  <div className="detail-section-label mono">{lt.factsLabel}</div>
+                  <ul className="detail-facts-list">
+                    {activeLayer.facts.map((f, i) => (
+                      <li key={i} className="detail-fact-item">{f}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* tool cards */}
+              {activeLayer.toolDetails?.length > 0 && (
+                <div className="detail-tool-cards">
+                  <div className="detail-section-label mono">{lt.toolsLabel}</div>
+                  <div className="detail-tool-list">
+                    {activeLayer.toolDetails.map(td => {
+                      const url = TOOL_LINKS[td.name]
+                      return (
+                        <div key={td.name} className="detail-tool-row">
+                          <div className="detail-tool-name">
+                            {url
+                              ? <a href={url} target="_blank" rel="noopener noreferrer" className="detail-tool-link">{td.name} <span>↗</span></a>
+                              : <span>{td.name}</span>
+                            }
+                          </div>
+                          <div className="detail-tool-desc">{td.desc}</div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
           ) : (
-            <div className="detail-placeholder">
+            <div className="detail-placeholder glass-card">
               <span>←</span>
               <p>{lt.placeholder}</p>
             </div>

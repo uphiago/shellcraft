@@ -51,39 +51,40 @@
   border-radius: 50%;
 }
 
+/* Glows: verde terminal sutil no centro, branco difuso nas bordas */
 .glow-1 {
-  width: 900px;
-  height: 700px;
+  width: 800px;
+  height: 600px;
   background: radial-gradient(ellipse at center,
-    oklch(60% 0.2 250 / 0.18) 0%,
-    oklch(60% 0.2 250 / 0.06) 40%,
+    rgba(63, 185, 80, 0.07) 0%,
+    rgba(63, 185, 80, 0.02) 45%,
     transparent 70%
   );
-  top: -300px;
-  left: -200px;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .glow-2 {
-  width: 800px;
-  height: 700px;
+  width: 700px;
+  height: 500px;
   background: radial-gradient(ellipse at center,
-    oklch(60% 0.18 300 / 0.14) 0%,
-    oklch(60% 0.18 300 / 0.04) 45%,
-    transparent 70%
+    rgba(255, 255, 255, 0.04) 0%,
+    transparent 65%
   );
-  top: 50px;
-  right: -250px;
+  top: -150px;
+  right: -200px;
 }
 
 .glow-3 {
-  width: 600px;
-  height: 500px;
+  width: 500px;
+  height: 400px;
   background: radial-gradient(ellipse at center,
-    oklch(65% 0.18 145 / 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 0%,
     transparent 65%
   );
   bottom: 0;
-  left: 35%;
+  left: -100px;
 }
 
 /* fade suave para a próxima seção */
@@ -136,22 +137,22 @@
 }
 
 .hero-title {
+  font-family: 'GeistPixel', monospace;
   font-size: clamp(40px, 6vw, 76px);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.1;
   color: #fff;
   margin-bottom: 24px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .hero-highlight {
-  /* gradient com parada no meio para evitar zona morta acinzentada */
+  /* B&W: branco puro para a palavra de destaque */
   background: linear-gradient(
     135deg,
-    oklch(72% 0.18 250) 0%,
-    oklch(68% 0.22 270) 35%,
-    oklch(65% 0.2 300) 65%,
-    oklch(72% 0.15 310) 100%
+    #ffffff 0%,
+    rgba(255,255,255,0.8) 60%,
+    rgba(255,255,255,0.6) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -229,4 +230,21 @@
   color: rgba(255,255,255,0.3);
   font-family: 'JetBrains Mono', monospace;
   text-transform: uppercase;
+}
+
+/* ── mobile ── */
+@media (max-width: 600px) {
+  .hero {
+    padding: 60px 24px;
+  }
+  .hero-sub {
+    font-size: 15px;
+  }
+  .hero-stack {
+    gap: 8px;
+  }
+  .hero-stack-item {
+    font-size: 12px;
+    padding: 6px 14px;
+  }
 }

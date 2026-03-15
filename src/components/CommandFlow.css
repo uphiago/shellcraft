@@ -23,15 +23,31 @@
 
 .flow-prompt {
   padding: 14px 20px;
-  border-radius: 12px 12px 0 0;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 0;
   font-size: 15px;
-  border-bottom: none;
   margin-bottom: 0;
   position: relative;
   z-index: 1;
+}
+
+/* connector line from prompt down to first node */
+.flow-prompt-pipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+  height: 32px;
+  justify-content: center;
+}
+
+.flow-prompt-pipe-line {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.07));
+  border-radius: 2px;
 }
 
 .flow-prompt-ps  { color: #bc8cff; }
@@ -149,7 +165,12 @@
   transition: all 0.2s;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
+
+.flow-node-card:hover::before { opacity: 0.06 !important; }
 
 .flow-node-card::before {
   content: '';
@@ -278,6 +299,7 @@
   gap: 6px;
   padding-bottom: 20px;
   border-bottom: 1px solid rgba(255,255,255,0.07);
+  min-height: 108px; /* prevents layout shift when titles differ in length */
 }
 
 .fd-step {
@@ -307,6 +329,7 @@
   font-size: 14px;
   color: var(--text-muted);
   line-height: 1.75;
+  min-height: 72px; /* 3 lines — prevents vertical jump */
 }
 
 .fd-payload {
@@ -335,6 +358,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-height: 76px; /* 3 rows × ~25px — prevents layout shift */
 }
 
 .fd-meta-row {
@@ -384,4 +408,30 @@
   box-shadow: 0 0 8px var(--c);
   width: 20px;
   border-radius: 4px;
+}
+
+/* ── mobile ── */
+@media (max-width: 600px) {
+  .flow-root {
+    grid-template-columns: 1fr;
+  }
+  .flow-pipeline {
+    order: 1;
+  }
+  .flow-detail {
+    order: 2;
+    position: static;
+  }
+  .fd-header {
+    min-height: unset;
+  }
+  .fd-desc {
+    min-height: unset;
+  }
+  .fd-meta {
+    min-height: unset;
+  }
+  .flow-payload-bubble {
+    display: none; /* hidden on small screens */
+  }
 }

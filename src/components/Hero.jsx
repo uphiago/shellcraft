@@ -14,11 +14,6 @@ export default function Hero() {
       </div>
 
       <div className="hero-content">
-        <div className="hero-badge">
-          <span className="hero-badge-dot" />
-          {h.badge}
-        </div>
-
         <h1 className="hero-title">
           {h.title1}<br />
           {h.title2} <span className="hero-highlight">{h.highlight}</span><br />

@@ -14,7 +14,7 @@ const STEP_STATIC = {
   output:     { icon: '▶',  color: '#58a6ff', direction: 'up',    payload: 'On branch main\nnothing to commit' },
 }
 
-const STEP_DURATION = 1800
+const STEP_DURATION = 2600
 
 export default function CommandFlow() {
   const { lang, t } = useLang()
@@ -81,9 +81,14 @@ export default function CommandFlow() {
         <div className="flow-pipeline">
           <div className="flow-prompt glass-card">
             <span className="flow-prompt-ps mono">~/projects</span>
-            <span className="flow-prompt-sym mono"> $ </span>
+            <span className="flow-prompt-sym mono">&nbsp;$&nbsp;</span>
             <span className="flow-prompt-cmd mono">git status</span>
             <span className="flow-prompt-cursor" />
+          </div>
+
+          {/* connector from prompt to first node */}
+          <div className="flow-prompt-pipe">
+            <div className="flow-prompt-pipe-line" />
           </div>
 
           <div className="flow-nodes">
@@ -112,9 +117,11 @@ export default function CommandFlow() {
                     </div>
                   )}
 
-                  <div
+                  <button
                     className={`flow-node-card glass-card ${isActive ? 'active' : ''} ${isDone ? 'done' : ''}`}
                     style={{ '--c': step.color }}
+                    onClick={() => handleDotClick(i)}
+                    title={step.label}
                   >
                     <div className="fnc-left">
                       <div className={`fnc-icon mono ${isActive && pulse ? 'pulse' : ''}`}>{step.icon}</div>
@@ -131,7 +138,7 @@ export default function CommandFlow() {
                       )}
                       <div className={`fnc-status ${isActive ? 'active' : isDone ? 'done' : ''}`} />
                     </div>
-                  </div>
+                  </button>
                 </div>
               )
             })}

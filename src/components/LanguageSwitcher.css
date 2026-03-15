@@ -3,24 +3,22 @@
   top: 20px;
   right: 24px;
   z-index: 100;
-  font-size: 22px;
-  line-height: 1;
-  padding: 6px 8px;
-  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  padding: 6px 12px;
+  border-radius: 6px;
   border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   backdrop-filter: blur(12px);
   cursor: pointer;
-  transition: border-color 0.15s, transform 0.15s;
+  transition: border-color 0.15s, color 0.15s;
 }
 
 .lang-switcher:hover {
   border-color: rgba(255,255,255,0.2);
-  transform: scale(1.08);
-}
-
-.lang-switcher:active {
-  transform: scale(0.96);
+  color: rgba(255,255,255,0.85);
 }
 
 .lang-btn {
