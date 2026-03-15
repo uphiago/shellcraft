@@ -1,8 +1,8 @@
 # shellcraft
 
-Interactive web companion to the [terminal ecosystem video series](https://youtube.com/@uphiago). Maps every layer between your keyboard and the kernel — with animations, tool links, and PT-BR / EN support.
+Maps every layer between your keyboard and the kernel — interactive diagrams, animated execution flow, and tool links. PT-BR / EN.
 
-**Live:** [shellcraft.vercel.app](https://shellcraft.vercel.app) · [YouTube](https://youtube.com/@uphiago) · [X](https://x.com/uphiago)
+**Live:** [shellcraft.vercel.app](https://shellcraft.vercel.app)
 
 ---
 
