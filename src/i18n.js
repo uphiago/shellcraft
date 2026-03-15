@@ -2,11 +2,11 @@ export const translations = {
   'pt-BR': {
     hero: {
       badge: 'ecossistema de terminal',
-      title1: 'Você usa terminal.',
-      title2: 'Mas usa',
-      highlight: '5 softwares',
-      title3: 'ao mesmo tempo.',
-      sub: 'Terminal, shell, multiplexer, framework, ferramentas CLI - cada camada tem um papel. Vamos destrinchar o ecossistema completo de forma visual.',
+      title1: 'Você acha que é só o terminal.',
+      title2: 'São',
+      highlight: '5 ferramentas',
+      title3: 'simultâneas.',
+      sub: 'Terminal emulator, multiplexer, shell, framework, CLI tools - cada camada tem um papel. Vamos destrinchar o ecossistema completo de forma visual.',
     },
     layers: {
       label: 'diagrama principal',
@@ -44,11 +44,11 @@ export const translations = {
   'en': {
     hero: {
       badge: 'terminal ecosystem',
-      title1: 'You use the terminal.',
-      title2: 'But you use',
-      highlight: '5 softwares',
-      title3: 'at the same time.',
-      sub: 'Terminal, shell, multiplexer, framework, CLI tools - each layer has a role. Let\'s break down the full ecosystem visually.',
+      title1: 'You think it\'s just the terminal.',
+      title2: 'It\'s',
+      highlight: '5 tools',
+      title3: 'running at once.',
+      sub: 'Terminal emulator, multiplexer, shell, framework, CLI tools - each layer has a role. Let\'s break down the full ecosystem visually.',
     },
     layers: {
       label: 'main diagram',

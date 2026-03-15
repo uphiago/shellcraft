@@ -1,14 +1,7 @@
 .layer-layout {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 24px;
-  align-items: stretch; /* both columns always same height = no layout shift */
-}
-
-@media (max-width: 900px) {
-  .layer-layout {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .layer-stack {
@@ -154,10 +147,10 @@
   line-height: 1;
 }
 
-/* ── detail panel ── */
+/* ── detail panel — below the stack, fixed height, never moves ── */
 .layer-detail {
-  /* fills the grid cell height set by the layer-stack column */
-  min-height: 0;
+  height: 360px;
+  margin-top: 20px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
@@ -174,7 +167,15 @@
   border-radius: 14px;
   overflow: hidden;
   border-top: 2px solid var(--color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
   animation: detailFade 0.22s ease;
+}
+
+/* header spans full width */
+.detail-header {
+  grid-column: 1 / -1;
 }
 
 @keyframes detailFade {
@@ -188,9 +189,10 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding: 20px 22px 16px;
+  padding: 16px 22px 14px;
   border-bottom: 1px solid var(--glass-border);
   background: rgba(255,255,255,0.02);
+  grid-column: 1 / -1;
 }
 
 .detail-header-left {
@@ -232,23 +234,24 @@
   flex-shrink: 0;
 }
 
-/* description */
+/* description — left column */
 .detail-text {
   font-size: 13px;
   color: var(--text-muted);
   line-height: 1.75;
   padding: 16px 22px;
-  border-bottom: 1px solid var(--glass-border);
+  border-right: 1px solid var(--glass-border);
 }
 
-/* misconception */
+/* misconception — left column, below description */
 .detail-misconception {
   display: flex;
   gap: 10px;
   align-items: flex-start;
   padding: 12px 22px;
-  background: rgba(248,81,73,0.06);
-  border-bottom: 1px solid rgba(248,81,73,0.12);
+  background: rgba(248,81,73,0.05);
+  border-top: 1px solid rgba(248,81,73,0.1);
+  border-right: 1px solid var(--glass-border);
 }
 
 .detail-misconception-icon {
@@ -273,10 +276,11 @@
   margin-bottom: 10px;
 }
 
-/* facts */
+/* facts — right column */
 .detail-facts {
-  padding: 16px 22px;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--glass-border);
+  overflow-y: auto;
 }
 
 .detail-facts-list {
@@ -292,9 +296,10 @@
   line-height: 1.55;
 }
 
-/* tool cards */
+/* tool cards — right column */
 .detail-tool-cards {
-  padding: 16px 22px 20px;
+  padding: 14px 20px 16px;
+  overflow-y: auto;
 }
 
 .detail-tool-list {
@@ -404,7 +409,18 @@
     white-space: normal;
   }
   .layer-detail {
-    max-height: none;
-    position: static;
+    height: auto;
+    max-height: 480px;
+  }
+  .detail-inner {
+    grid-template-columns: 1fr;
+  }
+  .detail-text,
+  .detail-misconception {
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .detail-misconception {
+    border-bottom: 1px solid rgba(248,81,73,0.1);
   }
 }
