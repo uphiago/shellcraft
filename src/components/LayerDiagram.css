@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 360px;
   gap: 24px;
-  align-items: stretch;
+  align-items: start;
 }
 
 @media (max-width: 900px) {
@@ -155,26 +155,23 @@
   line-height: 1;
 }
 
-/* ── detail panel — fixed height = stack height, scrolls internally ── */
+/* ── detail panel — sticky sidebar, height bounded by viewport ── */
 .layer-detail {
-  overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid var(--glass-border);
-  background: rgba(255,255,255,0.015);
-  backdrop-filter: blur(14px);
-  /* stretch fills the grid row height (= stack height) */
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-}
-
-/* content cross-fade */
-.detail-inner {
-  flex: 1;
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.08) transparent;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.015);
+  backdrop-filter: blur(14px);
+}
+
+/* content cross-fade */
+.detail-inner {
   border-radius: 14px;
   border-top: 2px solid var(--color);
   animation: detailFade 0.22s ease;
@@ -185,15 +182,19 @@
   to   { opacity: 1; }
 }
 
-/* header */
+/* header — sticky so it stays visible while content scrolls */
 .detail-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   padding: 16px 22px 14px;
   border-bottom: 1px solid var(--glass-border);
-  background: rgba(255,255,255,0.02);
+  background: rgba(13,17,23,0.95);
+  backdrop-filter: blur(12px);
 }
 
 .detail-header-left {

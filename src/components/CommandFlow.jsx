@@ -14,7 +14,7 @@ const STEP_STATIC = {
   output:     { icon: '▶',  color: '#58a6ff', direction: 'up',    payload: 'On branch main\nnothing to commit' },
 }
 
-const STEP_DURATION = 2600
+const STEP_DURATION = 5200
 
 export default function CommandFlow() {
   const { lang, t } = useLang()

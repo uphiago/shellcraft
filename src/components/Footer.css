@@ -125,12 +125,17 @@
 @media (max-width: 640px) {
   .footer {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 24px 20px;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding: 28px 20px;
   }
 
-  .footer-nav {
-    gap: 16px;
+  .footer-left {
+    align-items: center;
+  }
+
+  .footer-right {
+    gap: 20px;
   }
 }
