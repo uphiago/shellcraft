@@ -105,11 +105,11 @@ export default function LayerDiagram() {
                   </div>
                 </div>
                 <div className="layer-tools">
-                  {layer.tools.slice(0, 4).map(t => (
+                  {layer.tools.slice(0, 3).map(t => (
                     <ToolChip key={t} name={t} />
                   ))}
-                  {layer.tools.length > 4 && (
-                    <span className="tool-chip mono muted">+{layer.tools.length - 4}</span>
+                  {layer.tools.length > 3 && (
+                    <span className="tool-chip mono muted">+{layer.tools.length - 3}</span>
                   )}
                 </div>
               </button>
@@ -126,9 +126,9 @@ export default function LayerDiagram() {
 
         <div className={`layer-detail ${activeLayer ? 'visible' : ''}`}>
           {activeLayer ? (
-            <div key={activeLayer.id} className="detail-inner glass-card">
+            <div key={activeLayer.id} className="detail-inner" style={{ '--color': activeLayer.color }}>
               {/* header */}
-              <div className="detail-header" style={{ '--color': activeLayer.color }}>
+              <div className="detail-header">
                 <div className="detail-header-left">
                   <span className="detail-icon">{activeLayer.icon}</span>
                   <div>
