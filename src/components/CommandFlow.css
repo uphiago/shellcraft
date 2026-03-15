@@ -414,28 +414,92 @@
   border-radius: 4px;
 }
 
+/* ── inline detail (mobile only — hidden on desktop) ── */
+.flow-inline-detail {
+  display: none;
+}
+
 /* ── mobile ── */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .flow-root {
     grid-template-columns: 1fr;
   }
-  .flow-pipeline {
-    order: 1;
-  }
+  /* hide sidebar detail panel — inline detail takes over */
   .flow-detail {
-    order: 2;
-    position: static;
-  }
-  .fd-header {
-    min-height: unset;
-  }
-  .fd-desc {
-    min-height: unset;
-  }
-  .fd-meta {
-    min-height: unset;
+    display: none;
   }
   .flow-payload-bubble {
-    display: none; /* hidden on small screens */
+    display: none;
+  }
+
+  /* show inline detail */
+  .flow-inline-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--c) 30%, rgba(255,255,255,0.06));
+    border-top: 2px solid var(--c);
+    background: rgba(13,17,23,0.7);
+    animation: detailSlide 0.22s ease;
+  }
+
+  @keyframes detailSlide {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fid-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .fid-payload {
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3) !important;
+  }
+
+  .fid-payload-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .fid-payload-value {
+    font-size: 12px;
+    color: var(--c);
+    line-height: 1.55;
+    margin: 0;
+    white-space: pre-wrap;
+  }
+
+  .fid-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .fid-meta-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+  .fid-meta-key {
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .fid-meta-val {
+    color: var(--text);
+    text-align: right;
+    opacity: 0.85;
   }
 }

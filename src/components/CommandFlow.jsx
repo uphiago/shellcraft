@@ -139,6 +139,25 @@ export default function CommandFlow() {
                       <div className={`fnc-status ${isActive ? 'active' : isDone ? 'done' : ''}`} />
                     </div>
                   </button>
+
+                  {/* Mobile inline detail — shown only on small screens when active */}
+                  {isActive && (
+                    <div className="flow-inline-detail" style={{ '--c': step.color }}>
+                      <p className="fid-desc">{step.desc}</p>
+                      <div className="fid-payload glass-card">
+                        <div className="fid-payload-label mono">{step.payloadLabel}</div>
+                        <pre className="fid-payload-value mono">{step.payload}</pre>
+                      </div>
+                      <div className="fid-meta">
+                        {step.detail.map(d => (
+                          <div key={d.label} className="fid-meta-row">
+                            <span className="fid-meta-key mono">{d.label}</span>
+                            <span className="fid-meta-val mono">{d.value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )
             })}
