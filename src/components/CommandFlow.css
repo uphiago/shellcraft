@@ -1,0 +1,387 @@
+.flow-section {
+  background: linear-gradient(180deg, transparent, rgba(88,166,255,0.03) 50%, transparent);
+}
+
+/* ── root layout ── */
+.flow-root {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .flow-root { grid-template-columns: 1fr; }
+}
+
+/* ── pipeline column ── */
+.flow-pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.flow-prompt {
+  padding: 14px 20px;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 15px;
+  border-bottom: none;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.flow-prompt-ps  { color: #bc8cff; }
+.flow-prompt-sym { color: #7d8590; }
+.flow-prompt-cmd { color: #3fb950; }
+.flow-prompt-cursor {
+  display: inline-block;
+  width: 9px;
+  height: 16px;
+  background: #e6edf3;
+  margin-left: 2px;
+  border-radius: 1px;
+  animation: blink 1.2s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.flow-nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── pipe connector ── */
+.flow-pipe {
+  position: relative;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-pipe::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,0.07);
+  transform: translateX(-50%);
+}
+
+.flow-pipe-fill {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(to bottom, var(--c), transparent);
+  transform: translateX(-50%);
+  transform-origin: top;
+  transition: none;
+}
+
+.flow-pipe-fill.animate {
+  animation: pipeFill 0.4s ease forwards;
+}
+
+@keyframes pipeFill {
+  from { top: 0; height: 0; opacity: 1; }
+  to   { top: 0; height: 100%; opacity: 1; }
+}
+
+.flow-pipe.return::before {
+  background: rgba(255,255,255,0.12);
+  border-left: 1px dashed rgba(255,255,255,0.15);
+}
+
+.return-label {
+  position: absolute;
+  right: 0;
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+
+/* payload bubble */
+.flow-payload-bubble {
+  position: absolute;
+  right: calc(50% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(13,17,23,0.95);
+  border: 1px solid var(--c);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 10px;
+  color: var(--c);
+  white-space: nowrap;
+  animation: bubblePop 0.3s ease;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--c) 25%, transparent);
+  pointer-events: none;
+}
+
+@keyframes bubblePop {
+  from { opacity: 0; transform: translateY(-50%) scale(0.85); }
+  to   { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
+/* ── node card ── */
+.flow-node-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(13,17,23,0.6);
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.flow-node-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.flow-node-card:hover::before  { opacity: 0.04; }
+.flow-node-card.active::before { opacity: 0.07; }
+.flow-node-card.active { border-color: var(--c); box-shadow: 0 0 0 1px var(--c), 0 0 20px color-mix(in srgb, var(--c) 20%, transparent); }
+.flow-node-card.done   { border-color: rgba(255,255,255,0.1); }
+
+.fnc-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.fnc-icon {
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  color: var(--c);
+  flex-shrink: 0;
+  font-style: normal;
+  transition: box-shadow 0.3s;
+}
+
+.fnc-icon.pulse {
+  animation: iconPulse 0.5s ease;
+}
+
+@keyframes iconPulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c) 60%, transparent); }
+  60%  { box-shadow: 0 0 0 10px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.fnc-text {}
+
+.fnc-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.flow-node-card.active .fnc-label { color: var(--c); }
+
+.fnc-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.fnc-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.fnc-payload {
+  font-size: 10px;
+  opacity: 0.8;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(4px); }
+  to   { opacity: 0.8; }
+}
+
+.fnc-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.fnc-status.active {
+  background: var(--c);
+  box-shadow: 0 0 8px var(--c);
+  animation: statusPulse 1.5s ease infinite;
+}
+
+.fnc-status.done {
+  background: rgba(63,185,80,0.6);
+}
+
+@keyframes statusPulse {
+  0%, 100% { box-shadow: 0 0 6px var(--c); }
+  50%       { box-shadow: 0 0 14px var(--c), 0 0 4px var(--c); }
+}
+
+/* ── detail panel ── */
+.flow-detail {
+  position: sticky;
+  top: 24px;
+}
+
+.flow-detail-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  background: rgba(13,17,23,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+}
+
+.fd-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.fd-step {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.fd-icon {
+  font-size: 28px;
+  font-style: normal;
+}
+
+.fd-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.fd-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.fd-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.fd-payload {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.3) !important;
+}
+
+.fd-payload-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.fd-payload-value {
+  font-size: 13px;
+  color: #3fb950;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.fd-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fd-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.fd-meta-key {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.fd-meta-val {
+  color: var(--text);
+  text-align: right;
+  opacity: 0.85;
+}
+
+.fd-progress {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.fd-progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.fd-progress-dot.done {
+  background: rgba(63,185,80,0.5);
+}
+
+.fd-progress-dot.active {
+  background: var(--c);
+  box-shadow: 0 0 8px var(--c);
+  width: 20px;
+  border-radius: 4px;
+}

@@ -1,0 +1,242 @@
+.layer-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layer-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.layer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.layer-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.layer-block {
+  width: 100%;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.layer-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.layer-block:hover::before,
+.layer-block.active::before {
+  opacity: 1;
+}
+
+.layer-block.active {
+  border-color: var(--color);
+}
+
+.layer-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.layer-icon {
+  font-size: 22px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  flex-shrink: 0;
+  font-style: normal;
+}
+
+.layer-info {
+  min-width: 0;
+}
+
+.layer-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.layer-optional {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.06);
+  padding: 2px 8px;
+  border-radius: 100px;
+  border: 1px solid var(--glass-border);
+}
+
+.layer-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.layer-tools {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tool-chip {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.tool-chip.muted {
+  opacity: 0.6;
+}
+
+.layer-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.connector-line {
+  width: 1px;
+  height: 16px;
+  background: linear-gradient(to bottom, var(--glass-border), var(--glass-border));
+}
+
+.connector-arrow {
+  font-size: 12px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+/* detail panel */
+.layer-detail {
+  position: sticky;
+  top: 24px;
+  padding: 28px;
+  border-radius: 16px;
+  min-height: 240px;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.layer-detail.visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.detail-icon {
+  font-size: 20px;
+  color: var(--color);
+}
+
+.detail-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.detail-text {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.detail-tools-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.detail-tools-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tool-chip-lg {
+  font-size: 12px;
+  color: var(--text);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--glass-border);
+  padding: 5px 12px;
+  border-radius: 8px;
+}
+
+.detail-placeholder {
+  height: 100%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.detail-placeholder span {
+  font-size: 24px;
+  opacity: 0.3;
+}

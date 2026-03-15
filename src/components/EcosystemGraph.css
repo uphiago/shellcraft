@@ -1,0 +1,120 @@
+.graph-section {
+  padding-bottom: 120px;
+}
+
+.legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-item span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.graph-container {
+  height: 680px;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* React Flow overrides */
+.react-flow__background {
+  background: transparent !important;
+}
+
+.react-flow__controls {
+  border: 1px solid var(--glass-border) !important;
+  background: rgba(13,17,23,0.9) !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+.react-flow__controls-button {
+  background: transparent !important;
+  border-color: var(--glass-border) !important;
+  color: var(--text-muted) !important;
+  fill: var(--text-muted) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* Custom nodes */
+.tool-node {
+  background: rgba(13, 17, 23, 0.9);
+  border: 1px solid var(--c);
+  border-radius: 10px;
+  padding: 0;
+  min-width: 120px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+  transition: box-shadow 0.2s;
+}
+
+.tool-node:hover {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--c) 30%, transparent), 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.tool-node-inner {
+  padding: 10px 14px;
+}
+
+.tool-node-cat {
+  font-size: 9px;
+  color: var(--c);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.tool-node-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e6edf3;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.tool-node-desc {
+  font-size: 11px;
+  color: #7d8590;
+  margin-top: 3px;
+}
+
+.cat-node {
+  background: rgba(13, 17, 23, 0.95);
+  border: 1px solid var(--c);
+  border-radius: 12px;
+  padding: 12px 24px;
+  box-shadow: 0 0 24px color-mix(in srgb, var(--c) 20%, transparent);
+}
+
+.cat-node-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c);
+  white-space: nowrap;
+}
+
+/* handles */
+.react-flow__handle {
+  background: rgba(255,255,255,0.15) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  width: 6px !important;
+  height: 6px !important;
+}
