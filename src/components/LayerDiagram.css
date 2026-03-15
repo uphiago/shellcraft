@@ -221,6 +221,26 @@
   border: 1px solid var(--glass-border);
   padding: 5px 12px;
   border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chip-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.chip-link:hover {
+  border-color: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+.chip-arrow {
+  font-size: 9px;
+  opacity: 0.5;
 }
 
 .detail-placeholder {

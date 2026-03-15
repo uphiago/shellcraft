@@ -1,6 +1,34 @@
 import { useState } from 'react'
 import './LayerDiagram.css'
 
+const TOOL_LINKS = {
+  'Alacritty':        'https://github.com/alacritty/alacritty',
+  'Kitty':            'https://github.com/kovidgoyal/kitty',
+  'WezTerm':          'https://github.com/wez/wezterm',
+  'Windows Terminal': 'https://github.com/microsoft/terminal',
+  'iTerm2':           'https://github.com/gnachman/iTerm2',
+  'tmux':             'https://github.com/tmux/tmux',
+  'zellij':           'https://github.com/zellij-org/zellij',
+  'bash':             'https://www.gnu.org/software/bash/',
+  'zsh':              'https://www.zsh.org/',
+  'fish':             'https://github.com/fish-shell/fish-shell',
+  'powershell':       'https://github.com/PowerShell/PowerShell',
+  'Oh My Zsh':        'https://github.com/ohmyzsh/ohmyzsh',
+  'Prezto':           'https://github.com/sorin-ionescu/prezto',
+  'Starship':         'https://github.com/starship/starship',
+  'Powerlevel10k':    'https://github.com/romkatv/powerlevel10k',
+  'git':              'https://github.com/git/git',
+  'docker':           'https://github.com/docker/docker-ce',
+  'kubectl':          'https://github.com/kubernetes/kubectl',
+  'grep':             'https://www.gnu.org/software/grep/',
+  'vim':              'https://github.com/vim/vim',
+  'terraform':        'https://github.com/hashicorp/terraform',
+  'node':             'https://github.com/nodejs/node',
+  'Linux':            'https://github.com/torvalds/linux',
+  'macOS':            'https://developer.apple.com/macos/',
+  'Windows':          'https://www.microsoft.com/windows',
+}
+
 const LAYERS = [
   {
     id: 'user',
@@ -76,9 +104,28 @@ const LAYERS = [
   },
 ]
 
+function ToolChip({ name, large }) {
+  const url = TOOL_LINKS[name]
+  const cls = large ? 'tool-chip-lg mono' : 'tool-chip mono'
+  if (url) {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${cls} chip-link`}
+        onClick={e => e.stopPropagation()}
+      >
+        {name}
+        <span className="chip-arrow">↗</span>
+      </a>
+    )
+  }
+  return <span className={cls}>{name}</span>
+}
+
 export default function LayerDiagram() {
   const [active, setActive] = useState(null)
-
   const activeLayer = LAYERS.find(l => l.id === active)
 
   return (
@@ -113,7 +160,7 @@ export default function LayerDiagram() {
                 </div>
                 <div className="layer-tools">
                   {layer.tools.slice(0, 4).map(t => (
-                    <span key={t} className="tool-chip mono">{t}</span>
+                    <ToolChip key={t} name={t} />
                   ))}
                   {layer.tools.length > 4 && (
                     <span className="tool-chip mono muted">+{layer.tools.length - 4}</span>
@@ -140,10 +187,10 @@ export default function LayerDiagram() {
               </div>
               <p className="detail-text">{activeLayer.details}</p>
               <div className="detail-tools">
-                <div className="detail-tools-label mono">exemplos</div>
+                <div className="detail-tools-label mono">ferramentas</div>
                 <div className="detail-tools-list">
                   {activeLayer.tools.map(t => (
-                    <span key={t} className="tool-chip-lg mono">{t}</span>
+                    <ToolChip key={t} name={t} large />
                   ))}
                 </div>
               </div>

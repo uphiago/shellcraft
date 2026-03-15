@@ -88,6 +88,27 @@
   font-weight: 600;
   color: #e6edf3;
   font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.node-link-icon {
+  font-size: 10px;
+  opacity: 0.4;
+  transition: opacity 0.15s;
+}
+
+.tool-node.has-link {
+  cursor: pointer;
+}
+
+.tool-node.has-link:hover .node-link-icon {
+  opacity: 0.9;
+}
+
+.tool-node.has-link:hover {
+  box-shadow: 0 0 24px color-mix(in srgb, var(--c) 35%, transparent), 0 0 0 1px rgba(255,255,255,0.1);
 }
 
 .tool-node-desc {
