@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useLang } from '../LanguageContext'
 import { layerTranslations } from '../i18n'
 import './LayerDiagram.css'
@@ -74,6 +74,19 @@ export default function LayerDiagram() {
 
   const [activeIdx, setActiveIdx] = useState(0)
   const [clicked, setClicked] = useState(false)
+  const stackRef = useRef(null)
+  const [panelHeight, setPanelHeight] = useState(null)
+
+  // Keep detail panel exactly as tall as the stack
+  useEffect(() => {
+    const el = stackRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      setPanelHeight(entry.contentRect.height)
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   function handleClick(i) {
     setActiveIdx(i)
@@ -93,7 +106,7 @@ export default function LayerDiagram() {
       </p>
 
       <div className="layer-layout">
-        <div className="layer-stack">
+        <div className="layer-stack" ref={stackRef}>
           {LAYERS.map((layer, i) => (
             <div key={layer.id} className="layer-row">
               <button
@@ -179,7 +192,7 @@ export default function LayerDiagram() {
           ))}
         </div>
 
-        <div className="layer-detail">
+        <div className="layer-detail" style={panelHeight ? { height: panelHeight } : undefined}>
           <div key={activeLayer.id} className="detail-inner" style={{ '--color': activeLayer.color }}>
             {/* header */}
             <div className="detail-header">

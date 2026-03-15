@@ -155,11 +155,8 @@
   line-height: 1;
 }
 
-/* ── detail panel — sticky sidebar, height bounded by viewport ── */
+/* ── detail panel — height matched to stack via JS ResizeObserver ── */
 .layer-detail {
-  position: sticky;
-  top: 24px;
-  max-height: calc(100vh - 48px);
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;

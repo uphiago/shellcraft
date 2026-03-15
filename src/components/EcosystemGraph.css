@@ -36,6 +36,14 @@
   overflow: hidden;
 }
 
+@media (max-width: 900px) {
+  .graph-container { height: 520px; }
+}
+
+@media (max-width: 600px) {
+  .graph-container { height: 400px; }
+}
+
 /* React Flow overrides */
 .react-flow__background {
   background: transparent !important;

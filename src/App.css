@@ -20,12 +20,21 @@ section.visible {
   transform: translateY(0);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   section {
-    padding: 56px 20px;
+    padding: 64px 28px;
   }
   .section-title {
-    font-size: 32px;
+    font-size: 38px;
+  }
+}
+
+@media (max-width: 600px) {
+  section {
+    padding: 52px 18px;
+  }
+  .section-title {
+    font-size: 30px;
   }
   .section-desc {
     font-size: 14px;
