@@ -64,8 +64,8 @@ function ToolNode({ data }) {
       title={url ? `${data.label} ↗` : data.label}
     >
       <Handle type="target" position={Position.Top} />
+      <div className="tool-node-accent" />
       <div className="tool-node-inner">
-        <div className="tool-node-cat mono">{data.category}</div>
         <div className="tool-node-name">
           {data.label}
           {url && <span className="node-link-icon">↗</span>}

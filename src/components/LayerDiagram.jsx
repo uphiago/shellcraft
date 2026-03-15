@@ -126,7 +126,7 @@ export default function LayerDiagram() {
 
         <div className={`layer-detail ${activeLayer ? 'visible' : ''}`}>
           {activeLayer ? (
-            <div className="detail-inner glass-card">
+            <div key={activeLayer.id} className="detail-inner glass-card">
               {/* header */}
               <div className="detail-header" style={{ '--color': activeLayer.color }}>
                 <div className="detail-header-left">
@@ -190,7 +190,7 @@ export default function LayerDiagram() {
               )}
             </div>
           ) : (
-            <div className="detail-placeholder glass-card">
+            <div className="detail-placeholder">
               <span>←</span>
               <p>{lt.placeholder}</p>
             </div>

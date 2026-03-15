@@ -278,11 +278,15 @@
 
 /* ── detail panel ── */
 .flow-detail {
-  position: sticky;
-  top: 24px;
+  /* fixed height — no sticky, no layout shift */
 }
 
 .flow-detail-inner {
+  height: 520px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
   display: flex;
   flex-direction: column;
   gap: 20px;

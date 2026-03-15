@@ -156,27 +156,29 @@
 
 /* ── detail panel ── */
 .layer-detail {
-  position: sticky;
-  top: 24px;
-  opacity: 0;
-  transform: translateX(8px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  pointer-events: none;
-  max-height: 80vh;
+  /* fixed height — never resizes, no layout shift */
+  height: 620px;
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
 }
 
-.layer-detail.visible {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto;
-}
-
+/* content cross-fade only — no size change */
 .detail-inner {
   padding: 0;
   border-radius: 14px;
   overflow: hidden;
+  animation: detailFade 0.18s ease;
+}
+
+@keyframes detailFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* header */
@@ -348,9 +350,10 @@
   line-height: 1.5;
 }
 
-/* placeholder */
+/* placeholder — fills the full fixed-height panel */
 .detail-placeholder {
-  min-height: 200px;
+  height: 100%;
+  min-height: 620px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -360,11 +363,13 @@
   font-size: 13px;
   text-align: center;
   padding: 40px;
+  border: none;
+  background: none;
 }
 
 .detail-placeholder span {
   font-size: 24px;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 /* chips still used in header row on the layer block */
