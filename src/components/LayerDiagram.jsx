@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useLang } from '../LanguageContext'
 import { layerTranslations } from '../i18n'
 import './LayerDiagram.css'
+
+const LAYER_DURATION = 3800
 
 const TOOL_LINKS = {
   'Alacritty':        'https://github.com/alacritty/alacritty',
@@ -65,7 +67,6 @@ function ToolChip({ name, large }) {
 export default function LayerDiagram() {
   const { lang, t } = useLang()
   const lt = t.layers
-  const [active, setActive] = useState(null)
 
   // Merge static data with translated strings
   const LAYERS = layerTranslations[lang].map(tr => ({
@@ -73,7 +74,31 @@ export default function LayerDiagram() {
     ...tr,
   }))
 
-  const activeLayer = LAYERS.find(l => l.id === active)
+  const total = LAYERS.length
+  const [activeIdx, setActiveIdx] = useState(0)
+  const timerRef = useRef(null)
+
+  function startLoop(fromIdx) {
+    clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
+      setActiveIdx(prev => (prev + 1) % total)
+    }, LAYER_DURATION)
+  }
+
+  useEffect(() => {
+    startLoop(0)
+    return () => clearInterval(timerRef.current)
+  }, [total])
+
+  function handleClick(i) {
+    clearInterval(timerRef.current)
+    setActiveIdx(i)
+    timerRef.current = setInterval(() => {
+      setActiveIdx(prev => (prev + 1) % total)
+    }, LAYER_DURATION)
+  }
+
+  const activeLayer = LAYERS[activeIdx]
 
   return (
     <section id="layers">
@@ -90,9 +115,9 @@ export default function LayerDiagram() {
           {LAYERS.map((layer, i) => (
             <div key={layer.id} className="layer-row">
               <button
-                className={`layer-block glass-card ${active === layer.id ? 'active' : ''}`}
+                className={`layer-block glass-card ${activeIdx === i ? 'active' : ''}`}
                 style={{ '--accent': layer.accent, '--color': layer.color }}
-                onClick={() => setActive(active === layer.id ? null : layer.id)}
+                onClick={() => handleClick(i)}
               >
                 <div className="layer-left">
                   <span className="layer-icon mono" style={{ color: layer.color }}>{layer.icon}</span>
@@ -124,77 +149,70 @@ export default function LayerDiagram() {
           ))}
         </div>
 
-        <div className={`layer-detail ${activeLayer ? 'visible' : ''}`}>
-          {activeLayer ? (
-            <div key={activeLayer.id} className="detail-inner" style={{ '--color': activeLayer.color }}>
-              {/* header */}
-              <div className="detail-header">
-                <div className="detail-header-left">
-                  <span className="detail-icon">{activeLayer.icon}</span>
-                  <div>
-                    <div className="detail-label">{activeLayer.label}</div>
-                    {activeLayer.responsibility && (
-                      <div className="detail-responsibility mono">{activeLayer.responsibility}</div>
-                    )}
-                  </div>
+        <div className="layer-detail">
+          <div key={activeLayer.id} className="detail-inner" style={{ '--color': activeLayer.color }}>
+            {/* header */}
+            <div className="detail-header">
+              <div className="detail-header-left">
+                <span className="detail-icon">{activeLayer.icon}</span>
+                <div>
+                  <div className="detail-label">{activeLayer.label}</div>
+                  {activeLayer.responsibility && (
+                    <div className="detail-responsibility mono">{activeLayer.responsibility}</div>
+                  )}
                 </div>
-                {activeLayer.optional && (
-                  <span className="detail-optional-badge mono">{lt.optional}</span>
-                )}
               </div>
-
-              {/* description */}
-              <p className="detail-text">{activeLayer.details}</p>
-
-              {/* misconception */}
-              {activeLayer.misconception && (
-                <div className="detail-misconception">
-                  <span className="detail-misconception-icon">⚠</span>
-                  <p>{activeLayer.misconception}</p>
-                </div>
+              {activeLayer.optional && (
+                <span className="detail-optional-badge mono">{lt.optional}</span>
               )}
+            </div>
 
-              {/* facts */}
-              {activeLayer.facts?.length > 0 && (
-                <div className="detail-facts">
-                  <div className="detail-section-label mono">{lt.factsLabel}</div>
-                  <ul className="detail-facts-list">
-                    {activeLayer.facts.map((f, i) => (
-                      <li key={i} className="detail-fact-item">{f}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+            {/* description */}
+            <p className="detail-text">{activeLayer.details}</p>
 
-              {/* tool cards */}
-              {activeLayer.toolDetails?.length > 0 && (
-                <div className="detail-tool-cards">
-                  <div className="detail-section-label mono">{lt.toolsLabel}</div>
-                  <div className="detail-tool-list">
-                    {activeLayer.toolDetails.map(td => {
-                      const url = TOOL_LINKS[td.name]
-                      return (
-                        <div key={td.name} className="detail-tool-row">
-                          <div className="detail-tool-name">
-                            {url
-                              ? <a href={url} target="_blank" rel="noopener noreferrer" className="detail-tool-link">{td.name} <span>↗</span></a>
-                              : <span>{td.name}</span>
-                            }
-                          </div>
-                          <div className="detail-tool-desc">{td.desc}</div>
+            {/* misconception */}
+            {activeLayer.misconception && (
+              <div className="detail-misconception">
+                <span className="detail-misconception-icon">⚠</span>
+                <p>{activeLayer.misconception}</p>
+              </div>
+            )}
+
+            {/* facts */}
+            {activeLayer.facts?.length > 0 && (
+              <div className="detail-facts">
+                <div className="detail-section-label mono">{lt.factsLabel}</div>
+                <ul className="detail-facts-list">
+                  {activeLayer.facts.map((f, i) => (
+                    <li key={i} className="detail-fact-item">{f}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* tool cards */}
+            {activeLayer.toolDetails?.length > 0 && (
+              <div className="detail-tool-cards">
+                <div className="detail-section-label mono">{lt.toolsLabel}</div>
+                <div className="detail-tool-list">
+                  {activeLayer.toolDetails.map(td => {
+                    const url = TOOL_LINKS[td.name]
+                    return (
+                      <div key={td.name} className="detail-tool-row">
+                        <div className="detail-tool-name">
+                          {url
+                            ? <a href={url} target="_blank" rel="noopener noreferrer" className="detail-tool-link">{td.name} <span>↗</span></a>
+                            : <span>{td.name}</span>
+                          }
                         </div>
-                      )
-                    })}
-                  </div>
+                        <div className="detail-tool-desc">{td.desc}</div>
+                      </div>
+                    )
+                  })}
                 </div>
-              )}
-            </div>
-          ) : (
-            <div className="detail-placeholder">
-              <span>←</span>
-              <p>{lt.placeholder}</p>
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
