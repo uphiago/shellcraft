@@ -8,7 +8,7 @@ Built for the YouTube channel as a reference companion to the video explaining t
 
 - **Layers diagram** — interactive breakdown of each layer: Terminal Emulator → Multiplexer → Shell → Framework → CLI → Kernel. Click any layer for details, facts, tool descriptions, and links.
 - **Execution flow** — animated step-by-step of what happens when you type `git status`, from keypress to kernel syscalls and back.
-- **Ecosystem map** — interactive node graph of 20+ tools and their connections. Drag, zoom, click nodes to open GitHub repos.
+- **Ecosystem map** — node graph of 20+ tools and their connections. Locked by default (scroll-safe); click **unlock** to drag, zoom, and explore. Click any node to open its GitHub repo.
 - **PT-BR / EN** — full i18n support, toggle in the top-right corner.
 
 ## Stack
