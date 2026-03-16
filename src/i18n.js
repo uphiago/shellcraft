@@ -157,7 +157,7 @@ export const layerTranslations = {
     {
       id: 'framework',
       label: 'Shell Framework',
-      desc: 'Roda dentro do processo do shell, não é uma camada independente.',
+      desc: 'Scripts e plugins dentro do processo do shell.',
       details: 'Não é um shell e não é uma camada de execução independente — roda dentro do próprio processo do shell. Oh My Zsh são scripts carregados no .zshrc; o shell os executa na inicialização. Starship é um binário chamado pelo shell a cada prompt render.',
       responsibility: 'Configurar + extender o processo do shell',
       facts: [
@@ -295,7 +295,7 @@ export const layerTranslations = {
     {
       id: 'framework',
       label: 'Shell Framework',
-      desc: 'Runs inside the shell process, not an independent execution layer.',
+      desc: 'Scripts and plugins inside the shell process.',
       details: 'Not a shell and not an independent execution layer — it runs inside the shell process itself. Oh My Zsh is just scripts loaded via .zshrc; the shell runs them at startup. Starship is a binary the shell calls on every prompt render.',
       responsibility: 'Configure + extend the shell process',
       facts: [
