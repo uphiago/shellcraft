@@ -170,4 +170,7 @@
   .hero-sub {
     font-size: 15px;
   }
+  .hero-scroll-hint {
+    bottom: 72px;
+  }
 }
