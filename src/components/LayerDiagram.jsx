@@ -93,12 +93,10 @@ export default function LayerDiagram() {
     setActiveIdx(i)
 
     if (rowEl && window.innerWidth <= 900) {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const top = rowEl.getBoundingClientRect().top + window.scrollY - 80
-          window.scrollTo({ top, behavior: 'smooth' })
-        })
-      })
+      setTimeout(() => {
+        const top = rowEl.getBoundingClientRect().top + window.scrollY - 80
+        window.scrollTo({ top, behavior: 'smooth' })
+      }, 50)
     }
   }
 
