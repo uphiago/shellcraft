@@ -157,9 +157,9 @@ export const layerTranslations = {
     {
       id: 'framework',
       label: 'Shell Framework',
-      desc: 'Plugins, temas e configuração do shell.',
-      details: 'Não é um shell - é configuração em cima do shell. Oh My Zsh adiciona plugins (git, docker, kubectl), temas e gerencia o .zshrc. Starship é um prompt cross-shell escrito em Rust que funciona em qualquer shell.',
-      responsibility: 'Configurar + extender o shell',
+      desc: 'Roda dentro do processo do shell, não é uma camada independente.',
+      details: 'Não é um shell e não é uma camada de execução independente — roda dentro do próprio processo do shell. Oh My Zsh são scripts carregados no .zshrc; o shell os executa na inicialização. Starship é um binário chamado pelo shell a cada prompt render.',
+      responsibility: 'Configurar + extender o processo do shell',
       facts: [
         'Oh My Zsh tem 300+ plugins e 150+ temas. Um dos mais estrelados do GitHub.',
         'Powerlevel10k usa um daemon C++ (gitstatus) para mostrar status git sem lentidão',
@@ -295,9 +295,9 @@ export const layerTranslations = {
     {
       id: 'framework',
       label: 'Shell Framework',
-      desc: 'Plugins, themes and shell configuration.',
-      details: 'Not a shell - configuration on top of the shell. Oh My Zsh adds plugins (git, docker, kubectl), themes and manages .zshrc. Starship is a cross-shell prompt written in Rust that works with any shell.',
-      responsibility: 'Configure + extend the shell',
+      desc: 'Runs inside the shell process, not an independent execution layer.',
+      details: 'Not a shell and not an independent execution layer — it runs inside the shell process itself. Oh My Zsh is just scripts loaded via .zshrc; the shell runs them at startup. Starship is a binary the shell calls on every prompt render.',
+      responsibility: 'Configure + extend the shell process',
       facts: [
         'Oh My Zsh has 300+ plugins and 150+ themes. One of the most starred repos on GitHub.',
         'Powerlevel10k uses a C++ daemon (gitstatus) to show git status without slowdown',
