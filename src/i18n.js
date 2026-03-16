@@ -33,8 +33,8 @@ export const translations = {
       desc: 'Todas as ferramentas e suas conexões. Arraste, zoom, explore.',
     },
     footer: {
-      brand: 'terminal ecosystem',
-      tagline: 'Made with ❤️ for devs',
+      brand: 'shellcraft',
+      tagline: 'terminal ecosystem',
       github: 'GitHub',
       stats: 'Stats',
     },
@@ -73,8 +73,8 @@ export const translations = {
       desc: 'All the tools and their connections. Drag, zoom, explore.',
     },
     footer: {
-      brand: 'terminal ecosystem',
-      tagline: 'Made with ❤️ for devs',
+      brand: 'shellcraft',
+      tagline: 'terminal ecosystem',
       github: 'GitHub',
       stats: 'Stats',
     },
