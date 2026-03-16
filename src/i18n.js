@@ -23,7 +23,7 @@ export const translations = {
       label: 'fluxo de execução',
       title: 'O que acontece quando você digita',
       desc: 'Passo a passo desde o teclado até o filesystem e de volta ao terminal.',
-      kernelNote: '◎ o kernel media cada etapa — leituras PTY, fork(), syscalls, filesystem',
+      kernelNote: '◎ o kernel media cada etapa: leituras PTY, fork(), syscalls, filesystem',
       step: 'passo',
     },
     graph: {
@@ -63,7 +63,7 @@ export const translations = {
       label: 'execution flow',
       title: 'What happens when you type',
       desc: 'Step by step from keyboard to filesystem and back to the terminal.',
-      kernelNote: '◎ the kernel mediates every step — PTY reads/writes, fork(), syscalls, filesystem',
+      kernelNote: '◎ the kernel mediates every step: PTY reads/writes, fork(), syscalls, filesystem',
       step: 'step',
     },
     graph: {
@@ -130,7 +130,7 @@ export const layerTranslations = {
         'Ambos permitem detach/attach - feche o terminal e reconecte sem perder o trabalho',
         'tmux -CC: modo especial para integração nativa com iTerm2',
       ],
-      misconception: 'Tecnicamente, o multiplexer também cria seus próprios pares PTY — ele próprio atua como emulador para o shell. A distinção aqui é funcional: enquanto o emulador renderiza pixels na tela, o multiplexer gerencia sessões e layouts sem renderizar nada.',
+      misconception: 'Tecnicamente, o multiplexer também cria seus próprios pares PTY e ele próprio atua como emulador para o shell. A distinção aqui é funcional: enquanto o emulador renderiza pixels na tela, o multiplexer gerencia sessões e layouts sem renderizar nada.',
       toolDetails: [
         { name: 'tmux', desc: 'C, ISC license. Padrão da indústria. Prefix key (Ctrl+b). Plugin ecosystem via TPM.' },
         { name: 'zellij', desc: 'Rust, MIT. Interface visível (sem memorizar atalhos). Plugins WASM. Mais amigável.' },
@@ -268,7 +268,7 @@ export const layerTranslations = {
         'Both support detach/attach - close terminal and reconnect without losing work',
         'tmux -CC: special mode for native integration with iTerm2',
       ],
-      misconception: 'Technically, the multiplexer also creates its own PTY pairs — it acts as a terminal emulator for the shell. The distinction here is functional: the emulator renders pixels on screen, while the multiplexer manages sessions and layouts without rendering anything.',
+      misconception: 'Technically, the multiplexer also creates its own PTY pairs and acts as a terminal emulator for the shell. The distinction here is functional: the emulator renders pixels on screen, while the multiplexer manages sessions and layouts without rendering anything.',
       toolDetails: [
         { name: 'tmux', desc: 'C, ISC license. Industry standard. Prefix key (Ctrl+b). Plugin ecosystem via TPM.' },
         { name: 'zellij', desc: 'Rust, MIT. Visible UI (no memorizing shortcuts). WASM plugins. More approachable.' },
@@ -298,7 +298,7 @@ export const layerTranslations = {
       id: 'framework',
       label: 'Shell Framework',
       desc: 'Scripts and plugins inside the shell process.',
-      details: 'Not a shell and not an independent execution layer — it runs inside the shell process itself. Oh My Zsh is just scripts loaded via .zshrc; the shell runs them at startup. Starship is a binary the shell calls on every prompt render.',
+      details: 'Not a shell and not an independent execution layer. Runs inside the shell process itself. Oh My Zsh is just scripts loaded via .zshrc; the shell runs them at startup. Starship is a binary the shell calls on every prompt render.',
       responsibility: 'Configure + extend the shell process',
       facts: [
         'Oh My Zsh has 300+ plugins and 150+ themes. One of the most starred repos on GitHub.',

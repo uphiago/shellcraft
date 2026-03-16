@@ -229,7 +229,6 @@
   100% { box-shadow: 0 0 0 0 transparent; }
 }
 
-.fnc-text {}
 
 .fnc-label {
   font-size: 14px;
@@ -401,6 +400,7 @@
   gap: 6px;
   justify-content: center;
   padding-top: 4px;
+  margin-top: auto;
 }
 
 .fd-progress-dot {

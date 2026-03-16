@@ -97,7 +97,7 @@
   opacity: 1;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .footer {
     flex-direction: column;
     align-items: center;
