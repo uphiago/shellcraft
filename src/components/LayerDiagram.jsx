@@ -90,20 +90,15 @@ export default function LayerDiagram() {
 
   function handleClick(i, rowEl) {
     if (!clicked) setClicked(true)
+    setActiveIdx(i)
 
-    // On mobile: lock the clicked row in place during layout shift
     if (rowEl && window.innerWidth <= 900) {
-      const before = rowEl.getBoundingClientRect().top
-      setActiveIdx(i)
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          const after = rowEl.getBoundingClientRect().top
-          const diff = after - before
-          if (diff !== 0) window.scrollBy({ top: diff, behavior: 'instant' })
+          const top = rowEl.getBoundingClientRect().top + window.scrollY - 80
+          window.scrollTo({ top, behavior: 'smooth' })
         })
       })
-    } else {
-      setActiveIdx(i)
     }
   }
 
