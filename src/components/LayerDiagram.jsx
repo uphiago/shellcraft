@@ -139,7 +139,7 @@ export default function LayerDiagram() {
                     <span className="tool-chip mono muted">+{layer.tools.length - 3}</span>
                   )}
                 </div>
-                {!clicked && <span className="layer-hint-dot" />}
+                {!clicked && i === 0 && <span className="layer-hint-dot" />}
               </button>
 
               {/* Mobile inline detail — hidden on desktop */}

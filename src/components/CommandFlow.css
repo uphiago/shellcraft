@@ -307,6 +307,16 @@
   backdrop-filter: blur(16px);
 }
 
+.fd-content {
+  display: contents;
+  animation: fdFade 0.22s ease;
+}
+
+@keyframes fdFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 .fd-header {
   display: flex;
   flex-direction: column;

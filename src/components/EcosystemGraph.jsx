@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import {
   ReactFlow,
-  addEdge,
   useNodesState,
   useEdgesState,
   Background,
@@ -243,15 +242,10 @@ export default function EcosystemGraph() {
   const { lang, t } = useLang()
   const gt = t.graph
   const [nodes, setNodes, onNodesChange] = useNodesState(buildNodes(lang))
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+  const [edges, , onEdgesChange] = useEdgesState(initialEdges)
   useEffect(() => {
     setNodes(buildNodes(lang))
   }, [lang])
-
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
-  )
 
   return (
     <section id="graph" className="graph-section">
@@ -276,7 +270,6 @@ export default function EcosystemGraph() {
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
           nodeTypes={nodeTypes}
           fitView
           fitViewOptions={{ padding: 0.2 }}

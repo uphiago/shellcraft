@@ -179,6 +179,7 @@ export default function CommandFlow() {
         {/* Detail panel */}
         <div className="flow-detail">
           <div className="flow-detail-inner">
+          <div key={active} className="fd-content">
             <div className="fd-header">
               <div className="fd-step mono" style={{ color: current.color }}>
                 {ft.step} {active + 1} / {total}
@@ -216,6 +217,7 @@ export default function CommandFlow() {
                 />
               ))}
             </div>
+          </div>
           </div>
         </div>
       </div>

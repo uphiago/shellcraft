@@ -41,7 +41,7 @@
 }
 
 @media (max-width: 600px) {
-  .graph-container { height: 400px; }
+  .graph-container { height: 300px; }
 }
 
 /* React Flow overrides */
