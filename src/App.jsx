@@ -3,6 +3,7 @@ import './App.css'
 import { Analytics } from '@vercel/analytics/react'
 import { LanguageProvider } from './LanguageContext'
 import LanguageSwitcher from './components/LanguageSwitcher'
+import SiteNav from './components/SiteNav'
 import Hero from './components/Hero'
 import LayerDiagram from './components/LayerDiagram'
 import EcosystemGraph from './components/EcosystemGraph'
@@ -30,6 +31,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <div className="app">
+        <SiteNav current="shellcraft" />
         <LanguageSwitcher />
         <Hero />
         <LayerDiagram />
