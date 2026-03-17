@@ -35,8 +35,8 @@ export default function App() {
         <LanguageSwitcher />
         <Hero />
         <LayerDiagram />
-        <EcosystemGraph />
         <CommandFlow />
+        <EcosystemGraph />
         <Footer />
       </div>
       <Analytics />
