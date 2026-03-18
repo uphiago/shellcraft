@@ -3,14 +3,16 @@
   top: 20px;
   right: 24px;
   z-index: 100;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   font-family: 'GeistMono', monospace;
   letter-spacing: 0.14em;
   color: rgba(255,255,255,0.35);
   background: none;
   border: none;
-  padding: 6px 0;
+  padding: 8px 4px;
+  min-height: 44px;
+  min-width: 44px;
   cursor: pointer;
   transition: opacity 0.3s ease, color 0.15s;
   opacity: 1;

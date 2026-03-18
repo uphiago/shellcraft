@@ -8,13 +8,21 @@ export default function LanguageSwitcher() {
   const timerRef = useRef(null)
 
   useEffect(() => {
+    const show = () => {
+      clearTimeout(timerRef.current)
+      timerRef.current = setTimeout(() => setScrolling(false), 200)
+    }
     const onScroll = () => {
       setScrolling(true)
       clearTimeout(timerRef.current)
-      timerRef.current = setTimeout(() => setScrolling(false), 900)
+      timerRef.current = setTimeout(() => setScrolling(false), 1200)
     }
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('scrollend', show, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('scrollend', show)
+    }
   }, [])
 
   const next = lang === 'pt-BR' ? 'en' : 'pt-BR'
